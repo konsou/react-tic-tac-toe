@@ -13,19 +13,22 @@ function App() {
   const changePlayer = () => currentPlayer === 'X' ? setCurrentPlayer('O') : setCurrentPlayer('X')
   const makeAMove = (row, column) => {
     console.log('MOVE', currentPlayer, row, column)
-    const newBoard = [ ...board ]
-    console.log(newBoard)
-    newBoard[row][column] = currentPlayer
-    console.log(newBoard)
-    setBoard(newBoard)
-    changePlayer()
+    if (board[row][column] === null) {
+      const newBoard = [ ...board ]
+      console.log(newBoard)
+      newBoard[row][column] = currentPlayer
+      console.log(newBoard)
+      setBoard(newBoard)
+      changePlayer()  
+    } else {
+      console.log('INVALID MOVE')
+    }
   }
 
   return (
     <div className="App">
       <CurrentPlayer currentPlayer={currentPlayer} />
       <Board board={board} handleClick={makeAMove} />
-      <button onClick={changePlayer}>Change player</button>
     </div>
   );
 }
