@@ -32,13 +32,21 @@ function App() {
         }
         // columns
         for (const column of [0, 1, 2]) {
-            if (board[0][column] === board[1][column] && board[1][column] === board[2][column] && board[0][column] !== null){ 
-                return board[0][column]
+            if (board[0][column] === board[1][column] && 
+                board[1][column] === board[2][column] && 
+                board[0][column] !== null){ 
+                    return board[0][column]
             }
         }
         // diagonals
-        if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) { return board[1][1] }
-        if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) { return board[1][1] }
+        if (board[0][0] === board[1][1] && 
+            board[1][1] === board[2][2] &&
+            board[1][1] !== null) { 
+                return board[1][1] }
+        if (board[0][2] === board[1][1] && 
+            board[1][1] === board[2][0] &&
+            board[1][1] !== null) { 
+                return board[1][1] }
         return null
     }
     const resetBoard = () => {
