@@ -7,17 +7,18 @@ function App() {
     const [ board, setBoard ] = useState([[null, null, null],
                                           [null, null, null],
                                           [null, null, null]])
-    const [ currentPlayer, setCurrentPlayer ] = useState('X')    
+    const [ currentPlayer, setCurrentPlayer ] = useState('X')  
+    const [ winner, setWinner ] = useState(null)
   
     const changePlayer = () => currentPlayer === 'X' ? setCurrentPlayer('O') : setCurrentPlayer('X')
     const makeAMove = (row, column) => {
         console.log('MOVE', currentPlayer, row, column)
-        if (board[row][column] === null) {
+        if (board[row][column] === null && winner === null) {
             const newBoard = [ ...board ]
             newBoard[row][column] = currentPlayer
             setBoard(newBoard)
             changePlayer()
-            console.log('winner?', checkWinner())
+            setWinner(checkWinner())
         } else {
             console.log('INVALID MOVE')
         }
@@ -43,7 +44,7 @@ function App() {
 
 return (
         <div className="App">
-            <CurrentPlayer currentPlayer={currentPlayer} />
+            <CurrentPlayer currentPlayer={currentPlayer} winner={winner} />
             <Board board={board} handleClick={makeAMove} />
         </div>
     ); 
