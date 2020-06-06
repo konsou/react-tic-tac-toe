@@ -41,11 +41,19 @@ function App() {
         if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) { return board[1][1] }
         return null
     }
+    const resetBoard = () => {
+        setBoard([[null, null, null],
+                  [null, null, null],
+                  [null, null, null]])
+        setCurrentPlayer('X')
+        setWinner(null)
+    }
 
 return (
         <div className="App">
             <CurrentPlayer currentPlayer={currentPlayer} winner={winner} />
             <Board board={board} handleClick={makeAMove} />
+            <button onClick={resetBoard}>Reset board</button>
         </div>
     ); 
 }
