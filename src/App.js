@@ -16,10 +16,29 @@ function App() {
             const newBoard = [ ...board ]
             newBoard[row][column] = currentPlayer
             setBoard(newBoard)
-            changePlayer()  
+            changePlayer()
+            console.log('winner?', checkWinner())
         } else {
             console.log('INVALID MOVE')
         }
+    }
+    const checkWinner = () => {
+        // rows
+        for (const row of board) { 
+            if (row.every(cell => cell === row[0]) && row[0] !== null) { 
+                return row[0]
+            } 
+        }
+        // columns
+        for (const column of [0, 1, 2]) {
+            if (board[0][column] === board[1][column] && board[1][column] === board[2][column] && board[0][column] !== null){ 
+                return board[0][column]
+            }
+        }
+        // diagonals
+        if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) { return board[1][1] }
+        if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) { return board[1][1] }
+        return null
     }
 
 return (
