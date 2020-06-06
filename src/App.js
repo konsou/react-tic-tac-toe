@@ -10,12 +10,21 @@ function App() {
                                         [null, null, null]])
   const [ currentPlayer, setCurrentPlayer ] = useState('X')    
   
-  const changePlayer = () => currentPlayer === 'X' ? setCurrentPlayer('Y') : setCurrentPlayer('X')
+  const changePlayer = () => currentPlayer === 'X' ? setCurrentPlayer('O') : setCurrentPlayer('X')
+  const makeAMove = (row, column) => {
+    console.log('MOVE', currentPlayer, row, column)
+    const newBoard = [ ...board ]
+    console.log(newBoard)
+    newBoard[row][column] = currentPlayer
+    console.log(newBoard)
+    setBoard(newBoard)
+    changePlayer()
+  }
 
   return (
     <div className="App">
       <CurrentPlayer currentPlayer={currentPlayer} />
-      <Board board={board} />
+      <Board board={board} handleClick={makeAMove} />
       <button onClick={changePlayer}>Change player</button>
     </div>
   );
