@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Board from './components/Board'
-import CurrentPlayer from './components/CurrentPlayer'
+import PlayerInfo from './components/PlayerInfo'
 
 function App() {
     const [ board, setBoard ] = useState([[null, null, null],
@@ -47,6 +47,13 @@ function App() {
             board[1][1] === board[2][0] &&
             board[1][1] !== null) { 
                 return board[1][1] }
+
+        // check for tie
+        if (board.every(row =>
+            row.every(cell =>
+                cell !== null))){
+                    return "TIE"
+                }
         return null
     }
     const resetBoard = () => {
@@ -59,7 +66,7 @@ function App() {
 
 return (
         <div className="App">
-            <CurrentPlayer currentPlayer={currentPlayer} winner={winner} />
+            <PlayerInfo currentPlayer={currentPlayer} winner={winner} />
             <Board board={board} handleClick={makeAMove} />
             <button onClick={resetBoard}>Reset board</button>
         </div>
